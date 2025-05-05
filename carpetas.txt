@@ -1,0 +1,27 @@
+/bodega-erp
+├── .electron-vite/           # Configuración de build
+├── src/
+│   ├── main/                 # Código del main process (Electron)
+│   │   └── main.js           # Punto de entrada de Electron
+│   ├── renderer/             # Frontend (Preact + Tailwind)
+│   │   ├── assets/           # Estilos e imágenes
+│   │   │   └── styles.css    # Estilos globales
+│   │   ├── core/             # Lógica compartida
+│   │   │   ├── errors/       # Manejo de errores
+│   │   │   ├── hooks/        # Hooks reutilizables
+│   │   │   └── utils/        # Utilidades globales
+│   │   ├── modules/          # Módulos del ERP
+│   │   │   └── inventario/   # Módulo de inventario
+│   │   │       ├── components/
+│   │   │       ├── hooks/
+│   │   │       ├── services/
+│   │   │       └── stores/
+│   │   └── App.jsx           # Componente principal
+│   ├── database/             # Conexión a MongoDB
+│   │   ├── adapters/         # Adaptadores para cambiar DB
+│   │   └── models/           # Esquemas de datos
+│   └── preload.js            # Comunicación segura entre procesos
+├── public/                   # Archivos estáticos
+├── electron-vite.config.js   # Configuración de Vite + Electron
+├── package.json              # Dependencias y scripts
+└── tailwind.config.js        # Configuración de Tailwind CSS
