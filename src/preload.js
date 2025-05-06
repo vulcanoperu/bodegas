@@ -1,5 +1,6 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  // Aquí expondremos APIs seguras más adelante si es necesario
+  connectToDB: () => ipcRenderer.invoke('connect-to-db'),
+  closeDB: () => ipcRenderer.invoke('close-db')
 });

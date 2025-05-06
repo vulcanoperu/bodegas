@@ -1,21 +1,21 @@
-
-
-
-
-
 import { h } from 'preact'
 import { useEffect } from 'preact/hooks'
 import { useStore } from "./core/hooks/useStore"
-import { initializeDB } from "../database/adapters/mongodb"
 
 export default function App() {
   const { state, setState } = useStore()
 
   useEffect(() => {
-    initializeDB()
-      .then(() => setState({ dbConnected: true }))
-      .catch(err => setState({ dbError: err.message }))
-  }, [])
+    window.electronAPI.connectToDB()
+      .then(result => {
+        if (result.success) {
+          setState({ dbConnected: true });
+        } else {
+          setState({ dbError: result.error });
+        }
+      })
+      .catch(err => setState({ dbError: err.message }));
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
