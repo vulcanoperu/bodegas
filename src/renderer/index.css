@@ -1,0 +1,11 @@
+/* Importar estilos personalizados (debe estar al inicio) */
+@import './assets/custom.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilo de prueba */
+body {
+  background-color: red !important; /* Para confirmar que se aplica */
+}

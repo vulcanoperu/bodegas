@@ -1,0 +1,10 @@
+/* Estilos personalizados */
+.bg-bodega {
+  background-color: #1e3a8a; /* Azul oscuro personalizado */
+}
+.text-bodega {
+  color: #1e3a8a;
+}
+.btn-bodega {
+  @apply bg-bodega text-white px-4 py-2 rounded hover:bg-blue-700 transition;
+}

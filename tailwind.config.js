@@ -1,13 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/renderer/**/*.{jsx,js}'],
+  content: [
+    './src/renderer/**/*.{js,jsx}', // Escanea todos los archivos .js y .jsx en src/renderer/
+  ],
   theme: {
-    extend: {
-      colors: {
-        primary: '#1D4ED8', // Azul para botones principales
-        secondary: '#F59E0B' // Amarillo para acentos
-      }
-    }
+    extend: {},
   },
-  plugins: []
-};
+  plugins: [],
+}

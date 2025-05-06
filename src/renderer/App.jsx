@@ -1,9 +1,11 @@
-import { h } from 'preact'
-import { useEffect } from 'preact/hooks'
-import { useStore } from "./core/hooks/useStore"
+import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
+import { useStore } from './core/hooks/useStore';
+import Login from './modules/Login';
+import Home from './modules/Home';
 
 export default function App() {
-  const { state, setState } = useStore()
+  const { state, setState } = useStore();
 
   useEffect(() => {
     window.electronAPI.connectToDB()
@@ -17,12 +19,14 @@ export default function App() {
       .catch(err => setState({ dbError: err.message }));
   }, []);
 
+  if (!state.isAuthenticated) {
+    return <Login />;
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-blue-600 text-white p-4">
         <h1 className="text-2xl">Bodega ERP</h1>
-      </header>
-      <main className="p-4">
         {state.dbConnected ? (
           <p className="text-green-600">Conectado a MongoDB</p>
         ) : (
@@ -30,7 +34,8 @@ export default function App() {
             {state.dbError || 'Conectando a la base de datos...'}
           </p>
         )}
-      </main>
+      </header>
+      <Home />
     </div>
-  )
+  );
 }
