@@ -1,26 +1,36 @@
-import { useElectronSafeDOM } from '@/core/hooks/useElectronSafeDOM';
-import ProductList from '@/modules/inventario/components/ProductList';
-import SaleList from '@/modules/ventas/components/SaleList';
-import '@/assets/styles.css';
+
+
+
+
+
+import { h } from 'preact'
+import { useEffect } from 'preact/hooks'
+import { useStore } from "./core/hooks/useStore"
+import { initializeDB } from "../database/adapters/mongodb"
 
 export default function App() {
-  const domReady = useElectronSafeDOM();
+  const { state, setState } = useStore()
 
-  if (!domReady) return <div>Cargando...</div>;
+  useEffect(() => {
+    initializeDB()
+      .then(() => setState({ dbConnected: true }))
+      .catch(err => setState({ dbError: err.message }))
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-8 text-center">Bodega ERP</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <ProductList />
-          </div>
-          <div>
-            <SaleList />
-          </div>
-        </div>
-      </div>
+      <header className="bg-blue-600 text-white p-4">
+        <h1 className="text-2xl">Bodega ERP</h1>
+      </header>
+      <main className="p-4">
+        {state.dbConnected ? (
+          <p className="text-green-600">Conectado a MongoDB</p>
+        ) : (
+          <p className="text-red-600">
+            {state.dbError || 'Conectando a la base de datos...'}
+          </p>
+        )}
+      </main>
     </div>
-  );
+  )
 }

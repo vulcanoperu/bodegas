@@ -1,14 +1,10 @@
-import { defineConfig } from 'electron-vite';
-import preact from '@preact/preset-vite';
-import path from 'path';
+import { defineConfig } from 'electron-vite'
+import preact from '@preact/preset-vite'
+import path from 'path'
 
 export default defineConfig({
   main: {
     build: {
-      minify: 'terser',
-      terserOptions: {
-        compress: { drop_console: true }
-      },
       outDir: 'dist/main'
     }
   },
@@ -18,22 +14,13 @@ export default defineConfig({
     }
   },
   renderer: {
-    root: './src/renderer',
-    publicDir: './public',
+    root: 'src/renderer',
     build: {
-      outDir: './src/renderer/dist',
-      emptyOutDir: true
-    },
-    server: {
-      port: 5173
+      outDir: 'src/renderer/dist'
     },
     plugins: [preact()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, 'src/renderer'),
-        'react': 'preact/compat',
-        'react-dom': 'preact/compat'
-      }
+    server: {
+      port: 3000
     }
   }
-});
+})
